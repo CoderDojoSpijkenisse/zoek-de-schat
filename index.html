@@ -46,28 +46,20 @@
         function clip(num, min, max) {
           return Math.min(Math.max(num, min), max);
         }
-        function inDeBuurtVanAnderKruisje(new_x, new_y) {
-          for (var x = 0; x < points.length; x++) {
-            var treshold = 75;
-            if (Math.abs(new_x - points[x].x) < treshold && Math.abs(new_y - points[x].y) < treshold) {
-              return true;
-            }
-          }
-          return false;
-        }
         var ratio = canvas.width / img.width;
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        var points = [];
-        for (var x = 0; x < 9; x++) {
-          var x_pos = clip(0.1, Math.random(), 0.9) * canvas.width,
-              y_pos = clip(0.1, Math.random(), 0.9) * canvas.height;
+        var points = [
+          { x: 0.42, y: 0.48, label: '' },
+          { x: 0.35, y: 0.2, label: '' },
+          { x: 0.67, y: 0.5, label: '' },
+          { x: 0.1, y: 0.43, label: '' },
+        ];
+        for (var x in points) {
+          var x_pos = points[x].x * canvas.width,
+              y_pos = points[x].y * canvas.height;
 
-          while (inDeBuurtVanAnderKruisje(x_pos, y_pos)) {
-            x_pos = clip(0.1, Math.random(), 0.9) * canvas.width,
-            y_pos = clip(0.1, Math.random(), 0.9) * canvas.height;
-          }
           ctx.drawImage(
             kruisje,
             x_pos,
@@ -75,7 +67,6 @@
             ratio * kruisje.width,
             ratio * kruisje.height
           );
-          points.push({x: x_pos, y: y_pos});
         }
       }
     </script>
