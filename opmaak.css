@@ -1,0 +1,59 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Maven Pro', sans-serif;
+}
+
+/* Linkjes */
+a {
+  color: gray;
+  text-decoration: none;
+}
+
+/* Indeling van de pagina (kolommen) */
+#fullscreen {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* or overflow:auto; if you want scrollbars */
+}
+
+#kaart {
+  float: left;
+  height: 100%;
+  width: 75%;
+}
+
+#instructies {
+  float: right;
+  height: 100%;
+  width: 25%;
+}
+
+/* Kolom met de kaart */
+#kaart {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Kolom met instructies */
+#instructies p, #instructies h1 {
+  margin: 25px;
+}
+
+.groot-midden {
+  font-size: 2em;
+  text-align: center;
+}
+
+.box {
+  border-radius: 5px;
+  border: 5px solid gray;
+  padding: 5px;
+}
+
+.box-hover:hover {
+  border: 5px solid lightgray;
+}

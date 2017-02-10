@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>Zoek de schat!</title>
+    <!-- https://fonts.google.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="opmaak.css" />
+  </head>
+  <body>
+    <div id="fullscreen">
+      <canvas id="kaart"></canvas>
+      <div id="instructies">
+        <h1>Instructies</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+
+        <h1>Hints</h1>
+        <p>
+          <i>Geen hints</i>
+        </p>
+
+        <h1>Muntjes</h1>
+        <p class="box groot-midden">
+          <img src="munt.png" /> <span id="geld">100</span>
+        </p>
+
+        <h1>Winkel</h1>
+        <p class="box box-hover groot-midden">
+          <a href="#">Koop hint</a>
+        </p>
+      </div>
+    </div>
+    <script>
+      var canvas  = document.getElementById('kaart')
+          ctx     = canvas.getContext("2d"),
+          img     = new Image();
+          kruisje = new Image();
+
+      canvas.setAttribute('width', Math.round(0.75 * screen.width));
+      canvas.setAttribute('height', Math.round(0.75 * screen.height));
+
+      img.src = 'kaart.png';
+      kruisje.src = 'kruis.png';
+
+      window.onload = function() {
+        function clip(num, min, max) {
+          return Math.min(Math.max(num, min), max);
+        }
+        function inDeBuurtVanAnderKruisje(new_x, new_y) {
+          for (var x = 0; x < points.length; x++) {
+            var treshold = 75;
+            if (Math.abs(new_x - points[x].x) < treshold && Math.abs(new_y - points[x].y) < treshold) {
+              return true;
+            }
+          }
+          return false;
+        }
+        var ratio = canvas.width / img.width;
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        var points = [];
+        for (var x = 0; x < 9; x++) {
+          var x_pos = clip(0.1, Math.random(), 0.9) * canvas.width,
+              y_pos = clip(0.1, Math.random(), 0.9) * canvas.height;
+
+          while (inDeBuurtVanAnderKruisje(x_pos, y_pos)) {
+            x_pos = clip(0.1, Math.random(), 0.9) * canvas.width,
+            y_pos = clip(0.1, Math.random(), 0.9) * canvas.height;
+          }
+          ctx.drawImage(
+            kruisje,
+            x_pos,
+            y_pos,
+            ratio * kruisje.width,
+            ratio * kruisje.height
+          );
+          points.push({x: x_pos, y: y_pos});
+        }
+      }
+    </script>
+  </body>
+</html>
