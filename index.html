@@ -11,8 +11,12 @@
   </head>
   <body>
     <div id="fullscreen">
-      <!-- Hier wordt de kaart getekend (dankzij de JavaScript hulpjes) -->
-      <canvas id="kaart"></canvas>
+      <!-- Hier wordt de kaart getekend -->
+      <img id="kaart" src="img/BG.png" usemap="#map"></img>
+      <map name="map">
+        <area shape="poly" coords="247, 198, 223, 210, 246, 222, 266, 210" onclick="controleer(this.id)" id="33" />
+        <area shape="poly" coords="170, 187, 150, 196, 171, 208, 193, 195" onclick="controleer(this.id)" id="52"/>
+      </map>
 
       <!-- Dit is de kolom met instructies -->
       <div id="instructies">
@@ -30,7 +34,7 @@
 
         <h1>Muntjes</h1>
         <p class="box groot-midden">
-          <img src="munt.png" /> <span id="geld">100</span>
+          <img src="munt.png" /> <span id="geld">---</span>
         </p>
 
         <h1>Winkel</h1>
@@ -41,14 +45,23 @@
     </div>
 
     <!-- Laad de hulpjes -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/imageMapResizer.min.js"></script>
     <script src="hulpjes.js"></script>
 
     <!-- Hier ga jij JavaScript schrijven -->
     <script>
-      function spel() {
-        var gekozen = kiesWillekeurigeNummers(1);
-        for (var x in gekozen) {
-          tekenKruisje(x);
+      var munten = 100;
+      // 12 betekent vakje [1,2]. Links bij nummertje 1, en rechts bij nummertje 2
+      // Stel hier in waar je overal kistjes hebt gezet.
+      var kistjes = ['33', '52'];
+      var gekozen = kistjes[Math.floor(Math.random() * kistjes.length)];
+
+      function controleer(id) {
+        if (id == gekozen) {
+          alert('Goed zo!');
+        } else {
+          alert('Fout!');
         }
       }
     </script>
