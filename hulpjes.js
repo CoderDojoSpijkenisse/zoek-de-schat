@@ -72,17 +72,17 @@ canvas.onclick = function(e) {
 
     var pos = getCursorPosition(canvas, e);
     if (Math.abs(x_pos - pos.x) < 20 && Math.abs(y_pos - pos.y) < 20) {
-      console.log('Raak');
+      // console.log('Raak');
     } else {
-      console.log('Mis [%d, %d]', x_pos, y_pos);
+      console.log('Kaart %o', [kaart.width, kaart.height]);
+      var canvas_size = getComputedStyle(canvas);
+      console.log('Canvas %o', [parseInt(canvas_size.getPropertyValue('width'), 10), parseInt(canvas_size.getPropertyValue('height'), 10)]);
+      console.log('Should be [%d, %d]', x_pos, y_pos);
     }
   }
-  console.log('Clicked at %o', [e.x, e.y]);
+  console.log('Clicked at %o', [pos.x, pos.y]);
 }
 
 function getCursorPosition(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    var x = event.clientX - rect.left;
-    var y = event.clientY - rect.top;
-    return {x: x, y: y};
+    return {x: event.x, y: event.y};
 }
