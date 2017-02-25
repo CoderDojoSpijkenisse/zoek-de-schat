@@ -11,12 +11,8 @@
   </head>
   <body>
     <div id="fullscreen">
-      <!-- Hier wordt de kaart getekend -->
-      <img id="kaart" src="img/BG.png" usemap="#map"></img>
-      <map name="map">
-        <area shape="poly" coords="247, 198, 223, 210, 246, 222, 266, 210" onclick="controleer(this.id)" id="33" />
-        <area shape="poly" coords="170, 187, 150, 196, 171, 208, 193, 195" onclick="controleer(this.id)" id="52"/>
-      </map>
+      <!-- Hier komt de kaart -->
+
 
       <!-- Dit is de kolom met instructies -->
       <div id="instructies">
@@ -28,13 +24,13 @@
         </p>
 
         <h1>Hints</h1>
-        <p>
+        <p id="hints">
           <i>Geen hints</i>
         </p>
 
         <h1>Muntjes</h1>
         <p class="box groot-midden">
-          <img src="munt.png" /> <span id="geld">---</span>
+          <img src="img/munt.png" /> <span id="geld">0</span>
         </p>
 
         <h1>Winkel</h1>
@@ -47,23 +43,13 @@
     <!-- Laad de hulpjes -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/imageMapResizer.min.js"></script>
-    <script src="hulpjes.js"></script>
+    <script src="js/hulpjes.js"></script>
 
     <!-- Hier ga jij JavaScript schrijven -->
     <script>
-      var munten = 100;
-      // 12 betekent vakje [1,2]. Links bij nummertje 1, en rechts bij nummertje 2
-      // Stel hier in waar je overal kistjes hebt gezet.
-      var kistjes = ['33', '52'];
-      var gekozen = kistjes[Math.floor(Math.random() * kistjes.length)];
-
-      function controleer(id) {
-        if (id == gekozen) {
-          alert('Goed zo!');
-        } else {
-          alert('Fout!');
-        }
-      }
+      // Stel hier in waar je overal kistjes hebt gezet, gebruik de namen uit de <area /> blokjes
+      var kistjes = [];
+      var gekozen = kistjes[0];
     </script>
   </body>
 </html>
